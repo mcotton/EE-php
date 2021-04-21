@@ -32,6 +32,13 @@ print('</ul>');
 
 
 
+print('<h1>Switch Account</h1>');
+print($een->switch_account($user_accounts[1][0]));
+print('switching to account: ' . $user_accounts[0][0]);
+print('getting layouts and devices...');
+$user_devices = $een->list_devices();
+
+
 print('<h1>User Layouts</h1>');
 print('<ul>');
 foreach($user_obj->layouts as $name => $value) {

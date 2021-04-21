@@ -108,6 +108,50 @@ class EagleEyeNetworks{
                 fclose($fp);
         }
 
+        function list_accounts() {
+                $cr = curl_init($this->HOST.'/g/account/list');
+                curl_setopt($cr, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($cr, CURLOPT_COOKIEJAR, $this->cookie);
+                curl_setopt($cr, CURLOPT_COOKIEFILE, $this->cookie);
+
+                $account_list = curl_exec($cr);
+                curl_close($cr);
+
+                if(isset($account_list)) {
+                        return json_decode($account_list);
+                } else {
+                        return json_decode("[]");
+                }
+	}
+
+
+        function switch_account($account_id) {
+                $cr = curl_init($this->HOST.'/g/aaa/switch_account');
+                $data = array(  'account_id' => $account_id );
+
+                curl_setopt($cr, CURLOPT_POST, true);
+                curl_setopt($cr, CURLOPT_POSTFIELDS, $data);
+                curl_setopt($cr, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($cr, CURLOPT_COOKIEJAR, $this->cookie);
+                curl_setopt($cr, CURLOPT_COOKIEFILE, $this->cookie);
+
+                $response = curl_exec($cr);
+		$obj =  json_decode($response);
+
+		curl_close($cr);
+
+		return $response;
+
+        }
+
+
+
+
+
+
+
+
+
 }
 
 ?>
