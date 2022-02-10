@@ -23,38 +23,38 @@ print("<li>Active Account ID: " . $user_obj -> active_account_id . "</li>");
 print('</ul>');
 
 
-print('<h1>User Accounts</h1>');
+print('<h1>Sub-Accounts</h1>');
 print('<ul>');
+
 foreach ($user_accounts as $account) {
-	print("<li>$account[1] - $account[0]</li>");
+
+    $een->switch_account($account[0]);
+
+    print('<li>' . $account[1] . ' - ' . $account[0] . '</li>');
+    
 }
 print('</ul>');
 
 
+foreach ($user_accounts as $account) {
 
-print('<h1>Switch Account</h1>');
-print($een->switch_account($user_accounts[1][0]));
-print('switching to account: ' . $user_accounts[0][0]);
-print('getting layouts and devices...');
-$user_devices = $een->list_devices();
+    $een->switch_account($account[0]);
+
+    #print('switching to account: ' . $account[1] . ' - ' . $account[0]);
+    
+    $user_devices = $een->list_devices();
+
+    print('<h1>User Devices (Attached Cameras) for ' . $account[1] . '</h1>');
+    print('<ul>');
+    foreach ($user_devices as $dev) {
+        if($dev[3] == 'camera' && $dev[5] == 'ATTD') {
+            print('<li>' . $dev[2] . ' [' . $dev[1] . ']</li>');
+        }
+    }
+    print('</ul>');
 
 
-print('<h1>User Layouts</h1>');
-print('<ul>');
-foreach($user_obj->layouts as $name => $value) {
-        print('<li>'.$name.': '.$value.'</li>');
 }
-print('</ul>');
-
-
-print('<h1>User Devices (Attached Cameras)</h1>');
-#print($user_devices);
-foreach ($user_devices as $dev) {
-	if($dev[3] == 'camera' && $dev[5] == 'ATTD') {
-		print("<img style='width: 320px;' src=image.php?c=$dev[1]>");
-	}
-}
-print('</ul>');
 
 
 ?>

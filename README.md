@@ -31,3 +31,6 @@ Run it with `docker-compose up --build -d`
     //you can use page.html and jquery.preview.js to show previews on your site
     $('#preview').cameraPreview({ 'camera_id': '1001abcd' });
 
+### Diagnostics ###
+
+If you want to see more of what is going on you can copy files from the `diagnostics` folder into the `code` forlder and run them. `main.php` is to see what a user inside of a sub-account can access and  'reseller_main.php` is to see it as a reseller.  Make sure you have the correct user credentials in `config.php` to use these files.

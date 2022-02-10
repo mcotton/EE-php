@@ -9,7 +9,6 @@ include('een.php');
 $een = new EagleEyeNetworks();
 
 $user_obj = $een->login();
-$user_accounts = $een->list_accounts();
 $user_devices = $een->list_devices();
 
 print('<h1>User Object</h1>');
@@ -21,15 +20,6 @@ print("<li>Active brand subdomain: " . $user_obj -> active_brand_subdomain . "</
 print("<li>Owner Account ID: " . $user_obj -> owner_account_id . "</li>");
 print("<li>Active Account ID: " . $user_obj -> active_account_id . "</li>");
 print('</ul>');
-
-
-print('<h1>User Accounts</h1>');
-print('<ul>');
-foreach ($user_accounts as $account) {
-	print("<li>$account[1] - $account[0]</li>");
-}
-print('</ul>');
-
 
 
 print('<h1>User Layouts</h1>');
